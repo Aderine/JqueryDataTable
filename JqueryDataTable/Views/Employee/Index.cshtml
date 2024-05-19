@@ -4,7 +4,7 @@
 }
 
 <h2>Employee List</h2>
-<table id="employeeTable">
+<table id="employeeTable" class="ui celled table">
     <thead>
         <tr>
             <th>Name</th>
@@ -16,12 +16,29 @@
     </thead>
 
 </table>
-<link href="//cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/2.0.7/css/dataTables.semanticui.css" rel="stylesheet"/>
 @section scripts{
-    <script src="//cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.semanticui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#employeeTable").DataTable();
+            $("#employeeTable").DataTable({
+                "ajax": {
+                    "url": "/Employee/GetList",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Name" },
+                    { "data": "Position" },
+                    { "data": "Office" },
+                    { "data": "Age" },
+                    { "data": "Salary" }
+                ]
+            });
 
         });
 
